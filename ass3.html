@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 600px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form id="registrationForm" onsubmit="return validateForm()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <div id="usernameError" class="error"></div>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <div id="emailError" class="error"></div>
+    
+    <label for="phone">Phone number:</label>
+    <input type="text" id="phone" name="phone" required>
+    <div id="phoneError" class="error"></div>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <div id="passwordError" class="error"></div>
+    
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    <div id="confirmPasswordError" class="error"></div>
+    
+    <input type="submit" value="Register">
+</form>
+
+<script>
+function validateForm() {
+    var username = document.getElementById('username').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Reset errors
+    document.getElementById('usernameError').textContent = "";
+    document.getElementById('emailError').textContent = "";
+    document.getElementById('phoneError').textContent = "";
+    document.getElementById('passwordError').textContent = "";
+    document.getElementById('confirmPasswordError').textContent = "";
+
+    var isValid = true;
+
+    // Validate Username
+    if (username === '') {
+        document.getElementById('usernameError').textContent = "Username cannot be empty.";
+        isValid = false;
+    }
+
+    // Validate Email
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById('emailError').textContent = "Invalid email format.";
+        isValid = false;
+    }
+
+    // Validate Phone Number
+    var phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+        document.getElementById('phoneError').textContent = "Phone number must be 10 digits and numeric only.";
+        isValid = false;
+    }
+
+    // Validate Password
+    if (password.length < 7) {
+        document.getElementById('passwordError').textContent = "Password must be at least 7 characters long.";
+        isValid = false;
+    }
+    var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[&$#@]).{7,}$/;
+    if (!passwordRegex.test(password)) {
+        document.getElementById('passwordError').textContent = "Password must contain at least one uppercase letter, one digit, and one special character from &,$,#@.";
+        isValid = false;
+    }
+
+    // Validate Confirm Password
+    if (password !== confirmPassword) {
+        document.getElementById('confirmPasswordError').textContent = "Passwords do not match.";
+        isValid = false;
+    }
+
+    // If form is valid, submit the form
+    if (isValid) {
+        alert('Registration successful!\n\nForm data:\nUsername: ' + username + '\nEmail: ' + email + '\nPhone: ' + phone);
+        window.location.href = "success.html"; // Redirect to success page
+    }
+
+    return false; // Prevent form submission
+}
+</script>
+
+</body>
+</html>
