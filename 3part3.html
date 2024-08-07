@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+    <style>
+        #dynamicText {
+            color: blue;
+            position: relative;
+        }
+        .red-text {
+            color:rgba(195, 18, 92, 0.589);
+        }
+    </style>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1 id="title">DOM Manipulation </h1>
+    <p id="dynamicText">"A smile can brighten the darkest day."</p>
+    <p class="red-text">Smile, it's free therapy." – Douglas Horton.</p>
+    <img id="image" src="smile1.jpg" alt="smile1" width="200">
+    <br><br>
+    <button id="changeTextButton">Change Text</button>
+    <button id="changeStyleButton">Change Style</button>
+    <button id="changeImageButton">Change Image</button>
+    <button id="addTextNodeButton">Add Text Node</button>
+    <button id="deleteNodeButton">Delete Node</button>
+    <button id="changeButtonTextButton">Change Button Text</button>
+    <button id="setBackgroundImageButton">Set Background Image</button>
+    <br><br>
+    <div id="textNodeContainer"></div>
+    <br>
+    <form id="sampleForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <button type="button" id="submitFormButton">Submit Form</button>
+    </form>
+
+    <script>
+        document.getElementById('changeTextButton').addEventListener('click', function() {
+            document.getElementById('title').innerHTML = "DOM Example";
+        });
+
+        document.getElementById('changeStyleButton').addEventListener('click', function() {
+            var dynamicText = document.getElementById('dynamicText');
+            dynamicText.style.color = 'blue';
+            dynamicText.style.top = '10px';
+            dynamicText.style.left = '10px';
+            dynamicText.style.fontSize = '20px';
+            dynamicText.style.fontFamily= 'Bodoni MT Black';
+        });
+
+        document.getElementById('changeImageButton').addEventListener('click', function() {
+            document.getElementById('image').src = 'smile2.png';
+        });
+
+        document.getElementById('addTextNodeButton').addEventListener('click', function() {
+            var textNodeContainer = document.getElementById('textNodeContainer');
+            var textNode = document.createTextNode('smile smile smile.');
+            textNodeContainer.appendChild(textNode);
+        });
+
+        document.getElementById('deleteNodeButton').addEventListener('click', function() {
+            var elementToDelete = document.getElementsByTagName('p')[1];
+            if (elementToDelete) {
+                elementToDelete.parentNode.removeChild(elementToDelete);
+            }
+        });
+
+        // Change button text using jQuery
+        $('#changeButtonTextButton').click(function() {
+            $(this).text("Text Changed");
+        });
+
+        // Set background-image using jQuery CSS property
+        $('#setBackgroundImageButton').click(function() {
+            $('body').css('background-image', 'url("https://pngimg.com/uploads/smiley/smiley_PNG74.png")');
+        });
+
+        // Access HTML form data using jQuery
+        $('#submitFormButton').click(function() {
+            var name = $('#name').val();
+            var email = $('#email').val();
+            alert('Name: ' + name + '\nEmail: ' + email);
+        });
+
+        // Add attribute using jQuery
+        $('#changeImageButton').click(function() {
+            $('#image').attr('alt', 'smile2.jpg');
+        });
+    </script>
+</body>
+</html>

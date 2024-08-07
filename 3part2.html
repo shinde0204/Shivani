@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+    <style>
+        #dynamicText {
+            color: blue;
+            position: relative;
+        }
+        .red-text {
+            color: rgba(195, 18, 92, 0.589);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">DOM Manipulation Example</h1>
+    <p id="dynamicText">"A smile can brighten the darkest day."</p>
+    <p class="red-text">"Smile, it's free therapy." – Douglas Horton.</p>
+    <img id="image" src="smile1.jpg" alt="smile1" width="200">
+    <br><br>
+    <button id="changeTextButton">Change Text</button>
+    <button id="changeStyleButton">Change Style</button>
+    <button id="changeImageButton">Change Image</button>
+    <button id="addTextNodeButton">Add Text Node</button>
+    <button id="deleteNodeButton">Delete Node</button>
+    <div id="textNodeContainer"></div>
+
+    <script>
+        document.getElementById('changeTextButton').addEventListener('click', function() {
+            document.getElementById('title').innerHTML = "DOM Manipulation ";
+        });
+
+        document.getElementById('changeStyleButton').addEventListener('click', function() {
+            var dynamicText = document.getElementById('dynamicText');
+            dynamicText.style.color = 'blue';
+            dynamicText.style.top = '10px';
+            dynamicText.style.left = '10px';
+            dynamicText.style.fontSize = '20px';
+            dynamicText.style.fontFamily= 'Bodoni MT Black';
+        });
+
+        document.getElementById('changeImageButton').addEventListener('click', function() {
+            document.getElementById('image').src = 'smile2.png';
+        });
+
+        document.getElementById('addTextNodeButton').addEventListener('click', function() {
+            var textNodeContainer = document.getElementById('textNodeContainer');
+            var textNode = document.createTextNode('smile smile smile.');
+            textNodeContainer.appendChild(textNode);
+        });
+
+        document.getElementById('deleteNodeButton').addEventListener('click', function() {
+            var elementToDelete = document.getElementsByTagName('p')[1];
+            if (elementToDelete) {
+                elementToDelete.parentNode.removeChild(elementToDelete);
+            }
+        });
+    </script>
+</body>
+</html>
